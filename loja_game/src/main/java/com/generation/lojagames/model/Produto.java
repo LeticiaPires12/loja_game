@@ -27,6 +27,9 @@ public class Produto {
 	private String nome;
 
 	@NotNull
+	// @DecimalMin(value = "0.00", message = "O atributo valor deve conter no mínimo
+	// 0.00 e no máximo 00000.00 digitos")
+	// @DecimalMax(value = "00000.00")
 	private BigDecimal valor;
 
 	@NotBlank(message = "O atributo descrição é obrigatório!")
@@ -37,10 +40,16 @@ public class Produto {
 	@Size(min = 5, max = 100, message = "O atributo marca deve conter no mínimo 05 e no máximo 100 caracteres")
 	private String marca;
 
+	@NotBlank
+	private String foto;
 
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
 	private Categoria categoria;
+
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -82,6 +91,13 @@ public class Produto {
 		this.marca = marca;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -91,4 +107,12 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+} 
